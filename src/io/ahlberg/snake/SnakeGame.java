@@ -2,11 +2,16 @@ package io.ahlberg.snake;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SnakeGame {
+public class SnakeGame  implements ActionListener {
   private JFrame gameFrame;
   private JPanel gamePanel;
   private GameGrid gg;
+  private Timer timer;
+
+  private Snake snake = new Snake(4);
 
   public static final int WIDTH = 640;
   public static final int HEIGHT = 640;
@@ -23,6 +28,9 @@ public class SnakeGame {
       }
     };
 
+    // Game loop will run at 20 fps
+    timer = new Timer(1000/5, this);
+
     gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     gamePanel.setBackground(Color.RED);
 
@@ -33,10 +41,29 @@ public class SnakeGame {
     gameFrame.setLocationRelativeTo(null);
     gameFrame.setVisible(true);
 
+    timer.start();
   }
 
   public static void main(String[] args) {
     new SnakeGame();
   }
 
+  private void updateLogic() {
+    snake.update();
+    // zero the last deque point, ie. making the snake move
+
+    Point[] snakePoints = snake.getSnakePoints();
+    for (Point p : snakePoints) {
+      gg.setTile(GameGrid.SNAKE, p);
+    }
+
+    gg.setTile(GameGrid.EMPTY, snake.getPreviousPoint());
+
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    updateLogic();
+    gamePanel.repaint();
+  }
 }

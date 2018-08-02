@@ -7,15 +7,22 @@ public class GameGrid {
   public static final int SNAKE = 1;
   public static final int FOOD  = 2;
 
+  public static final int GRID_WIDTH  = 32;
+  public static final int GRID_HEIGHT = 32;
+
   private static final int TILE_SIZE  = 16;
   private static final int TILE_GAP   = 4;
   private static final int TILE_TOTAL = TILE_SIZE + TILE_GAP;
 
-  private int[][] grid = new int[32][32];
+  private int[][] grid = new int[GRID_WIDTH][GRID_HEIGHT];
 
   public GameGrid() {
-    grid[24][18] = SNAKE;
-    grid[11][8] = FOOD;
+  }
+
+  // TODO - This method should be private in the future
+  public void setTile(int tileType, Point p) {
+    // TODO - Throw exception at illegal tileTYpe (0-2 accepted)
+    grid[p.x][p.y] = tileType;
   }
 
   public void paint(Graphics g) {
@@ -29,6 +36,7 @@ public class GameGrid {
            break;
          case SNAKE:
            g.fillRect(TILE_TOTAL * i + (TILE_GAP / 2), TILE_TOTAL * j + (TILE_GAP / 2), TILE_SIZE, TILE_SIZE);
+           System.out.println("Painting a snake tile");
            break;
          case FOOD:
            g.fillOval(TILE_TOTAL * i + (TILE_GAP / 2), TILE_TOTAL * j + (TILE_GAP / 2), TILE_SIZE, TILE_SIZE);
