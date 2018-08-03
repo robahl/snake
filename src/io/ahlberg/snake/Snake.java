@@ -38,16 +38,17 @@ public class Snake {
       case UP:
         break;
       case RIGHT:
-        Point head = snake.peekFirst();
-        if (head.x >= GameGrid.GRID_WIDTH - 1) {
-          head.x = 0;
-        } else {
-          head.x += 1;
-        }
         previousPoint = snake.removeLast();
+
+        Point newHead = snake.peekFirst().getLocation();
+        if (newHead.x >= GameGrid.GRID_WIDTH - 1) {
+          newHead.x = 0;
+        } else {
+          newHead.x += 1;
+        }
+
         // add new head
-        System.out.println(head);
-        snake.addFirst(head);
+        snake.addFirst(newHead);
         break;
       case DOWN:
         break;

@@ -29,7 +29,7 @@ public class SnakeGame  implements ActionListener {
     };
 
     // Game loop will run at 20 fps
-    timer = new Timer(1000/5, this);
+    timer = new Timer(1000/7, this);
 
     gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     gamePanel.setBackground(Color.RED);
@@ -49,15 +49,16 @@ public class SnakeGame  implements ActionListener {
   }
 
   private void updateLogic() {
+    gg.clear();
+
     snake.update();
     // zero the last deque point, ie. making the snake move
 
+
     Point[] snakePoints = snake.getSnakePoints();
     for (Point p : snakePoints) {
-      gg.setTile(GameGrid.SNAKE, p);
+      gg.grid[p.x][p.y] = GameGrid.SNAKE;
     }
-
-    gg.setTile(GameGrid.EMPTY, snake.getPreviousPoint());
 
   }
 
