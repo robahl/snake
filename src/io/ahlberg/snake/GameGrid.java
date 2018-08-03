@@ -14,13 +14,13 @@ public class GameGrid {
   private static final int TILE_GAP   = 4;
   private static final int TILE_TOTAL = TILE_SIZE + TILE_GAP;
 
-  protected int[][] grid = new int[GRID_WIDTH][GRID_HEIGHT];
+  private int[][] grid = new int[GRID_WIDTH][GRID_HEIGHT];
 
   public GameGrid() {
   }
 
   // TODO - This method should be private in the future
-  private void setTile(int tileType, Point p) {
+  public void setTile(int tileType, Point p) {
     // TODO - Throw exception at illegal tileTYpe (0-2 accepted)
     grid[p.x][p.y] = tileType;
   }

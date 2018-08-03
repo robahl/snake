@@ -49,6 +49,7 @@ public class SnakeGame  implements ActionListener {
   }
 
   private void updateLogic() {
+    // zero the grid
     gg.clear();
 
     snake.update();
@@ -57,7 +58,7 @@ public class SnakeGame  implements ActionListener {
 
     Point[] snakePoints = snake.getSnakePoints();
     for (Point p : snakePoints) {
-      gg.grid[p.x][p.y] = GameGrid.SNAKE;
+      gg.setTile(GameGrid.SNAKE, p);
     }
 
   }
