@@ -26,7 +26,7 @@ public class Snake {
     snake.add(new Point(8, 15));
     snake.add(new Point(7, 15));
 
-    direction = SnakeDirection.RIGHT;
+    direction = SnakeDirection.UP;
   }
 
   public Point[] getSnakePoints() {
@@ -34,27 +34,42 @@ public class Snake {
   }
 
   private void move() {
+    Point newHead = snake.peekFirst().getLocation();
+
     switch (direction) {
       case UP:
+        if (newHead.y <= 0) {
+          newHead.y = GameGrid.GRID_HEIGHT - 1;
+        } else {
+          newHead.y -= 1;
+        }
         break;
       case RIGHT:
-        previousPoint = snake.removeLast();
-
-        Point newHead = snake.peekFirst().getLocation();
         if (newHead.x >= GameGrid.GRID_WIDTH - 1) {
           newHead.x = 0;
         } else {
           newHead.x += 1;
         }
-
-        // add new head
-        snake.addFirst(newHead);
         break;
       case DOWN:
+        if (newHead.y >= GameGrid.GRID_HEIGHT - 1) {
+          newHead.y = 0;
+        } else {
+          newHead.y += 1;
+        }
         break;
       case LEFT:
+        if (newHead.x <= 0) {
+          newHead.x = GameGrid.GRID_WIDTH - 1;
+        } else {
+          newHead.x -= 1;
+        }
         break;
     }
+
+    // Add new head and remove the last tail tile
+    snake.addFirst(newHead);
+    previousPoint = snake.removeLast();
   }
 
   public void changeDirection() {

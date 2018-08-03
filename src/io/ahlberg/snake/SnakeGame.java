@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class SnakeGame  implements ActionListener {
+public class SnakeGame  implements ActionListener, KeyListener {
   private JFrame gameFrame;
   private JPanel gamePanel;
   private GameGrid gg;
@@ -15,6 +17,8 @@ public class SnakeGame  implements ActionListener {
 
   public static final int WIDTH = 640;
   public static final int HEIGHT = 640;
+
+  private final int TARGET_FPS = 7;
 
   public SnakeGame() {
     gameFrame = new JFrame("Snake");
@@ -28,11 +32,13 @@ public class SnakeGame  implements ActionListener {
       }
     };
 
-    // Game loop will run at 20 fps
-    timer = new Timer(1000/7, this);
+    // Game loop will run at TARGET_FPS
+    timer = new Timer(1000/TARGET_FPS, this);
 
     gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     gamePanel.setBackground(Color.RED);
+    gamePanel.addKeyListener(this);
+    gamePanel.setFocusable(true);
 
     gameFrame.add(gamePanel);
     gameFrame.pack();
@@ -68,4 +74,16 @@ public class SnakeGame  implements ActionListener {
     updateLogic();
     gamePanel.repaint();
   }
+
+  @Override
+  public void keyPressed(KeyEvent e) {
+    System.out.println("Key pressed");
+  }
+
+  @Override
+  public void keyTyped(KeyEvent e) {}
+
+  @Override
+  public void keyReleased(KeyEvent e) {}
+
 }
