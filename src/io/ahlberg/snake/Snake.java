@@ -10,7 +10,7 @@ public class Snake {
   private SnakeDirection direction;
   private Point previousPoint;
 
-  private enum SnakeDirection {
+  public enum SnakeDirection {
     UP,
     RIGHT,
     DOWN,
@@ -72,8 +72,12 @@ public class Snake {
     previousPoint = snake.removeLast();
   }
 
-  public void changeDirection() {
+  public void changeDirection(SnakeDirection dir) {
+    direction = dir;
+  }
 
+  public SnakeDirection getDirection() {
+    return direction;
   }
 
   public void update() {

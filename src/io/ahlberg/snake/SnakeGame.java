@@ -77,7 +77,26 @@ public class SnakeGame  implements ActionListener, KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
-    System.out.println("Key pressed");
+    int keyCode = e.getKeyCode();
+
+    switch (keyCode) {
+      case KeyEvent.VK_UP:
+        if (snake.getDirection() != Snake.SnakeDirection.DOWN)
+          snake.changeDirection(Snake.SnakeDirection.UP);
+        break;
+      case KeyEvent.VK_RIGHT:
+        if (snake.getDirection() != Snake.SnakeDirection.LEFT)
+          snake.changeDirection(Snake.SnakeDirection.RIGHT);
+        break;
+      case KeyEvent.VK_DOWN:
+        if (snake.getDirection() != Snake.SnakeDirection.UP)
+          snake.changeDirection(Snake.SnakeDirection.DOWN);
+        break;
+      case KeyEvent.VK_LEFT:
+        if (snake.getDirection() != Snake.SnakeDirection.RIGHT)
+          snake.changeDirection(Snake.SnakeDirection.LEFT);
+        break;
+    }
   }
 
   @Override
