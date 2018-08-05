@@ -5,10 +5,10 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Snake {
-  private int length;
   private Deque<Point> snake;
   private SnakeDirection direction;
   private Point previousPoint;
+  private boolean hasMovedInNewDirection;
 
   public enum SnakeDirection {
     UP,
@@ -17,8 +17,7 @@ public class Snake {
     LEFT
   }
 
-  public Snake(int length) {
-    this.length = length;
+  public Snake() {
     snake = new ArrayDeque<Point>();
 
     snake.add(new Point(10, 15));
@@ -73,11 +72,39 @@ public class Snake {
   }
 
   public void changeDirection(SnakeDirection dir) {
-    direction = dir;
+    if (hasMovedInNewDirection) {
+      direction = dir;
+      hasMovedInNewDirection = false;
+    }
   }
 
   public SnakeDirection getDirection() {
     return direction;
+  }
+
+  public void grow() {
+    Point head = snake.peekFirst().getLocation();
+
+    switch (direction) {
+      case UP:
+        head.y -= 1;
+        break;
+      case RIGHT:
+        head.x += 1;
+        break;
+      case DOWN:
+        head.y += 1;
+        break;
+      case LEFT:
+        head.x -= 1;
+        break;
+    }
+
+    snake.addFirst(head);
+  }
+
+  public void setHasMovedInNewDirection(boolean moved) {
+    hasMovedInNewDirection = true;
   }
 
   public void update() {

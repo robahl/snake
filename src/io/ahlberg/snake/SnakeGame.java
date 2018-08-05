@@ -13,12 +13,12 @@ public class SnakeGame  implements ActionListener, KeyListener {
   private GameGrid gg;
   private Timer timer;
 
-  private Snake snake = new Snake(4);
+  private Snake snake = new Snake();
 
   public static final int WIDTH = 640;
   public static final int HEIGHT = 640;
 
-  private final int TARGET_FPS = 7;
+  private final int TARGET_FPS = 10;
 
   public SnakeGame() {
     gameFrame = new JFrame("Snake");
@@ -67,13 +67,20 @@ public class SnakeGame  implements ActionListener, KeyListener {
       gg.setTile(GameGrid.SNAKE, p);
     }
 
+    // Prevent illegal moves pre frame
+    snake.setHasMovedInNewDirection(true);
+
   }
+
+  // Timer
 
   @Override
   public void actionPerformed(ActionEvent e) {
     updateLogic();
     gamePanel.repaint();
   }
+
+  // Input
 
   @Override
   public void keyPressed(KeyEvent e) {
@@ -96,6 +103,9 @@ public class SnakeGame  implements ActionListener, KeyListener {
         if (snake.getDirection() != Snake.SnakeDirection.RIGHT)
           snake.changeDirection(Snake.SnakeDirection.LEFT);
         break;
+      case KeyEvent.VK_A:
+        // Debug - pressing A increase snake length
+        snake.grow();
     }
   }
 
