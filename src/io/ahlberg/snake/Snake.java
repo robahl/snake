@@ -7,7 +7,6 @@ import java.util.Deque;
 public class Snake {
   private Deque<Point> snake;
   private SnakeDirection direction;
-  private Point previousPoint;
   private boolean hasMovedInNewDirection;
 
   public enum SnakeDirection {
@@ -39,7 +38,7 @@ public class Snake {
 
     // Add new head and remove the last tail tile
     snake.addFirst(newHead);
-    previousPoint = snake.removeLast();
+    snake.removeLast();
   }
 
   public void changeDirection(SnakeDirection dir) {
