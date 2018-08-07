@@ -18,7 +18,7 @@ public class SnakeGame  implements ActionListener, KeyListener {
   public static final int WIDTH = 640;
   public static final int HEIGHT = 640;
 
-  private final int TARGET_FPS = 10;
+  private final int TARGET_FPS = 20;
 
   public SnakeGame() {
     gameFrame = new JFrame("Snake");

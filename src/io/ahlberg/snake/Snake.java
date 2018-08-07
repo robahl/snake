@@ -33,38 +33,9 @@ public class Snake {
   }
 
   private void move() {
-    Point newHead = snake.peekFirst().getLocation();
+    Point head = snake.peekFirst().getLocation();
 
-    switch (direction) {
-      case UP:
-        if (newHead.y <= 0) {
-          newHead.y = GameGrid.GRID_HEIGHT - 1;
-        } else {
-          newHead.y -= 1;
-        }
-        break;
-      case RIGHT:
-        if (newHead.x >= GameGrid.GRID_WIDTH - 1) {
-          newHead.x = 0;
-        } else {
-          newHead.x += 1;
-        }
-        break;
-      case DOWN:
-        if (newHead.y >= GameGrid.GRID_HEIGHT - 1) {
-          newHead.y = 0;
-        } else {
-          newHead.y += 1;
-        }
-        break;
-      case LEFT:
-        if (newHead.x <= 0) {
-          newHead.x = GameGrid.GRID_WIDTH - 1;
-        } else {
-          newHead.x -= 1;
-        }
-        break;
-    }
+    Point newHead = getNextHeadPosition(head, getDirection());
 
     // Add new head and remove the last tail tile
     snake.addFirst(newHead);
@@ -85,22 +56,45 @@ public class Snake {
   public void grow() {
     Point head = snake.peekFirst().getLocation();
 
+    Point newHead = getNextHeadPosition(head, getDirection());
+
+    snake.addFirst(newHead);
+  }
+
+  // Calculate the next head position base by the snakes direction
+  private Point getNextHeadPosition(Point head, SnakeDirection direction)   {
     switch (direction) {
       case UP:
-        head.y -= 1;
+        if (head.y <= 0) {
+          head.y = GameGrid.GRID_HEIGHT - 1;
+        } else {
+          head.y -= 1;
+        }
         break;
       case RIGHT:
-        head.x += 1;
+        if (head.x >= GameGrid.GRID_WIDTH - 1) {
+          head.x = 0;
+        } else {
+          head.x += 1;
+        }
         break;
       case DOWN:
-        head.y += 1;
+        if (head.y >= GameGrid.GRID_HEIGHT - 1) {
+          head.y = 0;
+        } else {
+          head.y += 1;
+        }
         break;
       case LEFT:
-        head.x -= 1;
+        if (head.x <= 0) {
+          head.x = GameGrid.GRID_WIDTH - 1;
+        } else {
+          head.x -= 1;
+        }
         break;
     }
 
-    snake.addFirst(head);
+    return head;
   }
 
   public void setHasMovedInNewDirection(boolean moved) {
