@@ -14,6 +14,7 @@ public class SnakeGame  implements ActionListener, KeyListener {
   private Timer timer;
 
   private Snake snake = new Snake();
+  private Food food = new Food();
 
   public static final int WIDTH = 640;
   public static final int HEIGHT = 640;
@@ -59,17 +60,35 @@ public class SnakeGame  implements ActionListener, KeyListener {
     gg.clear();
 
     snake.update();
-    // zero the last deque point, ie. making the snake move
 
+    if (snakeCollidedWithFood()) {
+      snake.grow();
+    }
 
-    Point[] snakePoints = snake.getSnakePoints();
-    for (Point p : snakePoints) {
+    for (Point p : food.getFoodPoints()) {
+      gg.setTile(GameGrid.FOOD, p);
+    }
+
+    for (Point p : snake.getSnakePoints()) {
       gg.setTile(GameGrid.SNAKE, p);
     }
 
     // Prevent illegal moves pre frame
     snake.setHasMovedInNewDirection(true);
 
+  }
+
+  private boolean snakeCollidedWithFood() {
+    Point head = snake.getHead();
+
+    for (Point p : food.getFoodPoints()) {
+      if (p.equals(head)) {
+        food.ateFoodAtPoint(p);
+        return true;
+      }
+    }
+
+    return false;
   }
 
   // Timer
@@ -104,8 +123,8 @@ public class SnakeGame  implements ActionListener, KeyListener {
           snake.changeDirection(Snake.SnakeDirection.LEFT);
         break;
       case KeyEvent.VK_A:
-        // Debug - pressing A increase snake length
-        snake.grow();
+        // Debug - pressing A spawns food
+        food.spawnFoodAtPoint(food.generateValidRandomPoint(snake));
     }
   }
 

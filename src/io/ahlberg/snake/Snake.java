@@ -31,6 +31,10 @@ public class Snake {
     return snake.toArray(new Point[0]);
   }
 
+  public Point getHead() {
+    return snake.peekFirst().getLocation();
+  }
+
   private void move() {
     Point head = snake.peekFirst().getLocation();
 
@@ -98,6 +102,10 @@ public class Snake {
 
   public void setHasMovedInNewDirection(boolean moved) {
     hasMovedInNewDirection = true;
+  }
+
+  public boolean contains(Point p) {
+    return snake.contains(p);
   }
 
   public void update() {
