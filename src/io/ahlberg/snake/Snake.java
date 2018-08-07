@@ -105,8 +105,4 @@ public class Snake {
     move();
   }
 
-  public Point getPreviousPoint() {
-    return previousPoint;
-  }
-
 }
