@@ -125,9 +125,6 @@ public class SnakeGame  implements ActionListener, KeyListener {
         if (snake.getDirection() != Snake.SnakeDirection.RIGHT)
           snake.changeDirection(Snake.SnakeDirection.LEFT);
         break;
-      case KeyEvent.VK_A:
-        // Debug - pressing A spawns food
-        food.spawnFoodAtPoint(food.generateValidRandomPoint(snake));
     }
   }
 
