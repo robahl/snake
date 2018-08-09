@@ -51,6 +51,9 @@ public class SnakeGame  implements ActionListener, KeyListener {
     gameFrame.setVisible(true);
 
     timer.start();
+
+    // Initial food placement
+    addFood();
   }
 
   public static void main(String[] args) {
@@ -65,6 +68,7 @@ public class SnakeGame  implements ActionListener, KeyListener {
 
     if (snakeCollidedWithFood()) {
       snake.grow();
+      addFood();
       score.increase();
     }
 
@@ -92,6 +96,10 @@ public class SnakeGame  implements ActionListener, KeyListener {
     }
 
     return false;
+  }
+
+  private void addFood() {
+    food.spawnFoodAtPoint(food.generateValidRandomPoint(snake));
   }
 
   // Timer
