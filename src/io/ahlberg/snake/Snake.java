@@ -7,7 +7,8 @@ import java.util.Deque;
 public class Snake {
   private Deque<Point> snake;
   private SnakeDirection direction;
-  private boolean hasMovedInNewDirection;
+  private boolean hasMovedInNewDirection = false;
+  private boolean collidedWithSelf = false;
 
   public enum SnakeDirection {
     UP,
@@ -43,6 +44,11 @@ public class Snake {
     // Add new head and remove the last tail tile
     snake.addFirst(newHead);
     snake.removeLast();
+
+    // Check if the snake collided with itself
+    if (snake.contains(newHead)) {
+      collidedWithSelf = true;
+    }
   }
 
   public void changeDirection(SnakeDirection dir) {
@@ -100,8 +106,12 @@ public class Snake {
     return head;
   }
 
+  public boolean hasCollidedWithSelf() {
+    return collidedWithSelf;
+  }
+
   public void setHasMovedInNewDirection(boolean moved) {
-    hasMovedInNewDirection = true;
+    hasMovedInNewDirection = moved;
   }
 
   public boolean contains(Point p) {
