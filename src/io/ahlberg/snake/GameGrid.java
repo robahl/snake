@@ -19,7 +19,6 @@ public class GameGrid {
   public GameGrid() {
   }
 
-  // TODO - This method should be private in the future
   public void setTile(int tileType, Point p) {
     // TODO - Throw exception at illegal tileTYpe (0-2 accepted)
     grid[p.x][p.y] = tileType;

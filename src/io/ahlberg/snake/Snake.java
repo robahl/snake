@@ -41,13 +41,13 @@ public class Snake {
 
     Point newHead = getNextHeadPosition(head, getDirection());
 
-    // Add new head and remove the last tail tile
-    snake.addFirst(newHead);
     snake.removeLast();
-
     // Check if the snake collided with itself
     if (snake.contains(newHead)) {
       collidedWithSelf = true;
+    } else {
+      // Add new head and remove the last tail tile
+      snake.addFirst(newHead);
     }
   }
 

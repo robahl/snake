@@ -64,6 +64,13 @@ public class SnakeGame  implements ActionListener, KeyListener {
     // zero the grid
     gg.clear();
 
+    // game over?
+    if (snake.hasCollidedWithSelf()) {
+      timer.stop();
+      JOptionPane.showMessageDialog(gameFrame, "Game over!\nScore: " +
+          String.valueOf(score.getScore()), "GAME OVER", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     snake.update();
 
     if (snakeCollidedWithFood()) {
