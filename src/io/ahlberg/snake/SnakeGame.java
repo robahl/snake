@@ -15,6 +15,7 @@ public class SnakeGame  implements ActionListener, KeyListener {
 
   private Snake snake = new Snake();
   private Food food = new Food();
+  private Score score = new Score();
 
   public static final int WIDTH = 640;
   public static final int HEIGHT = 640;
@@ -30,6 +31,7 @@ public class SnakeGame  implements ActionListener, KeyListener {
       public void paintComponent(Graphics g) {
         super.paintComponent(g);
         gg.paint(g);
+        score.paint(g);
       }
     };
 
@@ -63,6 +65,7 @@ public class SnakeGame  implements ActionListener, KeyListener {
 
     if (snakeCollidedWithFood()) {
       snake.grow();
+      score.increase();
     }
 
     for (Point p : food.getFoodPoints()) {
