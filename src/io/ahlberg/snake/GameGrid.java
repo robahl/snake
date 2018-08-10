@@ -35,13 +35,14 @@ public class GameGrid {
      for (int j = 0; j < grid[i].length; j++) {
        switch (grid[i][j]) {
          case EMPTY:
-           g.drawRect(TILE_TOTAL * i + (TILE_GAP / 2), TILE_TOTAL * j + (TILE_GAP / 2), TILE_SIZE, TILE_SIZE);
+           // g.drawRect(TILE_TOTAL * i + (TILE_GAP / 2), TILE_TOTAL * j + (TILE_GAP / 2), TILE_SIZE, TILE_SIZE);
            break;
          case SNAKE:
            g.fillRect(TILE_TOTAL * i + (TILE_GAP / 2), TILE_TOTAL * j + (TILE_GAP / 2), TILE_SIZE, TILE_SIZE);
            break;
          case FOOD:
            g.fillOval(TILE_TOTAL * i + (TILE_GAP / 2), TILE_TOTAL * j + (TILE_GAP / 2), TILE_SIZE, TILE_SIZE);
+           break;
        }
 
      }
