@@ -68,9 +68,7 @@ public class SnakeGame  implements ActionListener, KeyListener {
 
     // game over?
     if (snake.hasCollidedWithSelf()) {
-      timer.stop();
-      JOptionPane.showMessageDialog(gameFrame, "Game over!\nScore: " +
-          String.valueOf(score.getScore()), "GAME OVER", JOptionPane.INFORMATION_MESSAGE);
+      gameOver();
     }
 
     snake.update();
@@ -92,6 +90,16 @@ public class SnakeGame  implements ActionListener, KeyListener {
     // Prevent illegal moves pre frame
     snake.setHasMovedInNewDirection(true);
 
+  }
+
+  private void gameOver() {
+    timer.stop();
+    String gameOverStr = score.isHighscore() ? "NEW HIGHSCORE: " : "Score: ";
+    JOptionPane.showMessageDialog(
+        gameFrame,
+        "Game over!\n" + gameOverStr + String.valueOf(score.getScore()),
+        "GAME OVER",
+        JOptionPane.INFORMATION_MESSAGE);
   }
 
   private boolean snakeCollidedWithFood() {
