@@ -41,7 +41,7 @@ public class SnakeGame  implements ActionListener, KeyListener {
     timer = new Timer(1000/TARGET_FPS, this);
 
     gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-    gamePanel.setBackground(Color.RED);
+    gamePanel.setBackground(new Color(0x2c2c2c));
     gamePanel.addKeyListener(this);
     gamePanel.setFocusable(true);
 

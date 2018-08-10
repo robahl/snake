@@ -29,18 +29,21 @@ public class GameGrid {
   }
 
   public void paint(Graphics g) {
-    g.setColor(Color.WHITE);
 
     for (int i = 0; i < grid.length; i++) {
      for (int j = 0; j < grid[i].length; j++) {
        switch (grid[i][j]) {
          case EMPTY:
-           // g.drawRect(TILE_TOTAL * i + (TILE_GAP / 2), TILE_TOTAL * j + (TILE_GAP / 2), TILE_SIZE, TILE_SIZE);
+           // Disabled for now
+           // g.setColor(new Color(0x2c2c2c));
+           // g.drawlRect(TILE_TOTAL * i + (TILE_GAP / 2), TILE_TOTAL * j + (TILE_GAP / 2), TILE_SIZE, TILE_SIZE);
            break;
          case SNAKE:
+           g.setColor(new Color(0xff0041));
            g.fillRect(TILE_TOTAL * i + (TILE_GAP / 2), TILE_TOTAL * j + (TILE_GAP / 2), TILE_SIZE, TILE_SIZE);
            break;
          case FOOD:
+           g.setColor(Color.YELLOW);
            g.fillOval(TILE_TOTAL * i + (TILE_GAP / 2), TILE_TOTAL * j + (TILE_GAP / 2), TILE_SIZE, TILE_SIZE);
            break;
        }
