@@ -15,7 +15,7 @@ public class Score {
 
   public void paint(Graphics g) {
     g.setColor(Color.WHITE);
-    g.setFont(new Font("Courier New", Font.BOLD, 36));
+    g.setFont(new Font("Courier New", Font.PLAIN, 36));
     g.drawString(String.valueOf(getScore()), 10, 40);
   }
 
