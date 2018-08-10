@@ -22,6 +22,8 @@ public class SnakeGame  implements ActionListener, KeyListener {
 
   private final int TARGET_FPS = 20;
 
+  private boolean paused = false;
+
   public SnakeGame() {
     gameFrame = new JFrame("Snake");
     gg = new GameGrid();
@@ -139,6 +141,15 @@ public class SnakeGame  implements ActionListener, KeyListener {
       case KeyEvent.VK_LEFT:
         if (snake.getDirection() != Snake.SnakeDirection.RIGHT)
           snake.changeDirection(Snake.SnakeDirection.LEFT);
+        break;
+      case KeyEvent.VK_P:
+        if (paused) {
+          timer.start();
+        } else {
+          timer.stop();
+        }
+
+        paused = !paused; // flip paused
         break;
     }
   }
