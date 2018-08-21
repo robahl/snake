@@ -67,6 +67,12 @@ public class Snake {
 
     Point newHead = getNextHeadPosition(head, getDirection());
 
+    // Check so that we don't grow into ourselves
+    if (snake.contains(newHead)) {
+      collidedWithSelf = true;
+      return;
+    }
+
     snake.addFirst(newHead);
   }
 
